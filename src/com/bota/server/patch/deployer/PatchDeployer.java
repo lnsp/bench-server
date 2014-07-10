@@ -39,7 +39,7 @@ public class PatchDeployer {
 			
 			for (File file : files) {
 				FileInputStream fileInputStream = new FileInputStream(file);
-				builder.append(file.getPath() + "$" + DigestUtils.md5Hex(fileInputStream) + System.lineSeparator());
+				builder.append(file.getPath().replace("\\", "/") + "$" + DigestUtils.md5Hex(fileInputStream) + System.lineSeparator());
 			}
 			File deployFolder = new File("deploy");
 			if (!deployFolder.exists()) deployFolder.mkdir();
