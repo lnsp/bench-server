@@ -26,6 +26,8 @@ The BotA (Battle of the Ancients, a game that is currently developed by me) Patc
 5. Enter `java -jar PatchDeployer.jar release.zip`
 6. Close the terminal if everything was successful
 
+When you want to use the server without the ZIP-file, you can just copy all your game files into the files folder, open a terminal and run the PatchDeployer.jar without any command line argument.
+
 ### Running the server
 
 1. After the deploying the patch you have to open a new terminal
