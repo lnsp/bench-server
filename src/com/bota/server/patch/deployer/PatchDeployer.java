@@ -16,9 +16,24 @@ import com.bota.server.patch.util.PathUtil;
 import com.bota.server.patch.util.UnzipUtil;
 
 public class PatchDeployer {
+	public static void hashFolder() throws IOException {
+		ArrayList<File> files = new ArrayList<File>();
+		PathUtil.listf("files", files);
+		StringBuilder builder = new StringBuilder();
+		
+		for (File file : files) {
+			FileInputStream fileInputStream = new FileInputStream(file);
+			builder.append(file.getPath().replace("\\", "/") + "$" + DigestUtils.md5Hex(fileInputStream) + System.lineSeparator());
+		}
+		
+		try (FileWriter fileWriter = new FileWriter("deploy/hash")) {
+			fileWriter.write(builder.toString());
+		}
+		System.out.println("Hash file done");
+	}
 	public static void main(String args[]) throws IOException {
 		if (args.length == 0) {
-			System.err.println("Need arguments: <zip file>");
+			hashFolder();
 			return;
 		}
 		String zipPath = args[0];
@@ -33,20 +48,11 @@ public class PatchDeployer {
 			unzipUtil.unzip(zipPath, "files");
 			System.out.println("Unzipped files");
 			
-			ArrayList<File> files = new ArrayList<File>();
-			PathUtil.listf("files", files);
-			StringBuilder builder = new StringBuilder();
-			
-			for (File file : files) {
-				FileInputStream fileInputStream = new FileInputStream(file);
-				builder.append(file.getPath().replace("\\", "/") + "$" + DigestUtils.md5Hex(fileInputStream) + System.lineSeparator());
-			}
 			File deployFolder = new File("deploy");
 			if (!deployFolder.exists()) deployFolder.mkdir();
-			try (FileWriter fileWriter = new FileWriter("deploy/hash")) {
-				fileWriter.write(builder.toString());
-			}
-			System.out.println("Hash file done");
+			
+			hashFolder();
+			
 			Path releaseFile = FileSystems.getDefault().getPath(zipPath);
 			Path serverFile = FileSystems.getDefault().getPath("deploy/patch.zip");
 			
