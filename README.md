@@ -31,10 +31,10 @@ When you want to use the server without the ZIP-file, you can just copy all your
 ### Running the server
 
 1. After the deploying the patch you have to open a new terminal
-2. We assume a conhash`ation for the standard HTTP-port 80 and a cache-lifetime of 10 minutes (600000ms)
-3. And type in `java -jar PatchServer.jar 80 600000`
-4. Now you should see some log messages
-5. Open your webbrowser and enter the URL `localhost/hash`
-6. When everything works fine, you should see a list of files and their attached hashes (only when the release.zip isn't empty)
+2. Type in `java -jar PatchServer.jar`
+3. Now you should see some log messages
+4. Open your webbrowser and enter the URL `localhost/hash`
+5. When everything works fine, you should see a list of files and their attached hashes (only when the release.zip isn't empty)
+6. You can customize the server by editing the config.properties file
 
 You successfully set up the BotA Patch Server!
