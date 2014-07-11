@@ -17,6 +17,8 @@ import com.bota.server.patch.util.UnzipUtil;
 
 public class PatchDeployer {
 	public static void hashFolder() throws IOException {
+		File deployFolder = new File("deploy");
+		if (!deployFolder.exists()) deployFolder.mkdir();
 		ArrayList<File> files = new ArrayList<File>();
 		PathUtil.listf("files", files);
 		StringBuilder builder = new StringBuilder();
@@ -47,9 +49,6 @@ public class PatchDeployer {
 			UnzipUtil unzipUtil = new UnzipUtil();
 			unzipUtil.unzip(zipPath, "files");
 			System.out.println("Unzipped files");
-			
-			File deployFolder = new File("deploy");
-			if (!deployFolder.exists()) deployFolder.mkdir();
 			
 			hashFolder();
 			
