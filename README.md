@@ -37,4 +37,22 @@ When you want to use the server without the ZIP-file, you can just copy all your
 5. When everything works fine, you should see a list of files and their attached hashes (only when the release.zip isn't empty)
 6. You can customize the server by editing the config.properties file
 
+### Example configuration file
+
+Here is a example configuration file (config.properties) with full commentated settings:
+
+```
+#BotA Patch Server Properties File
+#Fri Jul 11 19:23:10 CEST 2014
+# Enable /hash context (required for the BotA patcher)
+hash.context=true
+# Enabled /package context (not useful for the BotA patcher, just returns the zip file with the complete patch) 
+package.context=true
+# Enable /files context (required for the BotA patcher)
+files.context=true
+# Port for the listener
+server.port=80
+# Cache lifetime in milliseconds (600000ms = 600s = 10m)
+cache.lifetime=600000
+```
 You successfully set up the BotA Patch Server!
