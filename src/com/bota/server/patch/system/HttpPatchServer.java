@@ -56,7 +56,7 @@ public class HttpPatchServer {
 		if (!configProperties.containsKey("files.context"))
 			configProperties.put("files.context", "true");
 		if (!configProperties.containsKey("cache.lifetime"))
-			configProperties.put("cache.lifetime", "600");
+			configProperties.put("cache.lifetime", "600000");
 		if (!configProperties.containsKey("server.port"))
 			configProperties.put("server.port", "80");
 
