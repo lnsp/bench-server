@@ -1,4 +1,4 @@
-package com.bota.server.patch.system;
+package io.mooxmirror.bench.system;
 
 import java.io.BufferedInputStream;
 import java.io.File;

@@ -1,4 +1,4 @@
-package com.bota.server.patch.system;
+package io.mooxmirror.bench.system;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
-import com.bota.server.patch.util.PathUtil;
+import io.mooxmirror.bench.util.PathUtil;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
@@ -21,7 +21,7 @@ public class FilesHandler extends CachedHandler<HashMap<String, byte[]>> impleme
 	@Override
 	public void handle(HttpExchange httpExchange) throws IOException {
 		testCache();
-		
+
 		httpExchange.getResponseHeaders().add("Content-type", "application/octet-stream");
 		httpExchange.sendResponseHeaders(200, cacheData.get(httpExchange.getRequestURI().getPath()).length);
 		try (OutputStream zipOutputStream = httpExchange.getResponseBody()) {
@@ -31,10 +31,10 @@ public class FilesHandler extends CachedHandler<HashMap<String, byte[]>> impleme
 	@Override
 	public void reloadCache() throws IOException {
 		cacheData = new HashMap<String, byte[]>();
-		
+
 		ArrayList<File> files = new ArrayList<File>();
 		PathUtil.listf("files", files);
-		
+
 		for (File file : files) {
 			byte[] data = new byte[(int)file.length()];
 			FileInputStream zipInputStream = new FileInputStream(file);

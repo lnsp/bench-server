@@ -1,4 +1,4 @@
-package com.bota.server.patch.deployer;
+package io.mooxmirror.bench.deployer;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,8 +12,8 @@ import java.util.ArrayList;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
-import com.bota.server.patch.util.PathUtil;
-import com.bota.server.patch.util.UnzipUtil;
+import io.mooxmirror.bench.util.PathUtil;
+import io.mooxmirror.bench.util.UnzipUtil;
 
 public class PatchDeployer {
 	public static void hashFolder() throws IOException {
@@ -22,12 +22,12 @@ public class PatchDeployer {
 		ArrayList<File> files = new ArrayList<File>();
 		PathUtil.listf("files", files);
 		StringBuilder builder = new StringBuilder();
-		
+
 		for (File file : files) {
 			FileInputStream fileInputStream = new FileInputStream(file);
 			builder.append(file.getPath().replace("\\", "/") + "$" + DigestUtils.md5Hex(fileInputStream) + System.lineSeparator());
 		}
-		
+
 		try (FileWriter fileWriter = new FileWriter("deploy/hash")) {
 			fileWriter.write(builder.toString());
 		}
@@ -39,7 +39,7 @@ public class PatchDeployer {
 			return;
 		}
 		String zipPath = args[0];
-		
+
 		File zipFile = new File(zipPath);
 		if (zipFile.exists() && zipFile.isFile()) {
 			File filesDirectory = new File("files");
@@ -49,12 +49,12 @@ public class PatchDeployer {
 			UnzipUtil unzipUtil = new UnzipUtil();
 			unzipUtil.unzip(zipPath, "files");
 			System.out.println("Unzipped files");
-			
+
 			hashFolder();
-			
+
 			Path releaseFile = FileSystems.getDefault().getPath(zipPath);
 			Path serverFile = FileSystems.getDefault().getPath("deploy/patch.zip");
-			
+
 			Files.copy(releaseFile, serverFile, StandardCopyOption.REPLACE_EXISTING);
 			System.out.println("ZIP file copied");
 		}
