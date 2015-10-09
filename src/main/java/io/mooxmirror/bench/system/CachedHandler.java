@@ -1,4 +1,4 @@
-package com.bota.server.patch.system;
+package io.mooxmirror.bench.system;
 
 import java.io.IOException;
 import java.util.logging.Logger;
@@ -10,7 +10,7 @@ public abstract class CachedHandler<T> implements HttpHandler {
 	protected T cacheData;
 	protected long lastCacheUpdate;
 	private Logger logger;
-	
+
 	public CachedHandler(long cacheUpdateRate, Logger logger) {
 		this.cacheUpdateRate = cacheUpdateRate;
 		this.logger = logger;
@@ -23,5 +23,5 @@ public abstract class CachedHandler<T> implements HttpHandler {
 			lastCacheUpdate = System.currentTimeMillis();
 		}
 	}
-	
+
 }

@@ -1,4 +1,4 @@
-package com.bota.server.patch.util;
+package io.mooxmirror.bench.util;
 
 import java.io.File;
 import java.util.ArrayList;

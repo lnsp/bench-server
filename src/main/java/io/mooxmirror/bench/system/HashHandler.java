@@ -1,4 +1,4 @@
-package com.bota.server.patch.system;
+package io.mooxmirror.bench.system;
 
 import java.io.IOException;
 import java.io.OutputStream;
