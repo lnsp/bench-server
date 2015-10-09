@@ -1,10 +1,10 @@
-BotA Patch Server
+Bench
 =================
 
-BotA Patch Server provides a easy-to-use patch-environment for games.
+Bench provides a easy-to-use patch-environment for games and apps.
 
 ## How does it work?
-The BotA (Battle of the Ancients, a game that is currently developed by me) Patch Server uses three main contexts for sharing data.
+Bench uses three main contexts for sharing data.
 
 | Context  | Description |
 | -------- |-----------------------------------------------------------------------------------------------|
@@ -42,7 +42,7 @@ When you want to use the server without the ZIP-file, you can just copy all your
 Here is a example configuration file (config.properties) with full commentated settings:
 
 ```
-#BotA Patch Server Properties File
+#Bench Properties File
 #Fri Jul 11 19:23:10 CEST 2014
 # Enable /hash context (required for the BotA patcher)
 hash.context=true
@@ -55,4 +55,4 @@ server.port=80
 # Cache lifetime in milliseconds (600000ms = 600s = 10m)
 cache.lifetime=600000
 ```
-You successfully set up the BotA Patch Server!
+You successfully set up a new Bench server!
