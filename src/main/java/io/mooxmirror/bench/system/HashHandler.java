@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
+import java.nio.charset.Charset;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -26,7 +27,7 @@ public class HashHandler extends CachedHandler<String> implements HttpHandler {
 	@Override
 	public void reloadCache() throws IOException {
 		StringBuilder builder = new StringBuilder();
-		List<String> hashData = Files.readAllLines(FileSystems.getDefault().getPath("deploy/hash"));
+		List<String> hashData = Files.readAllLines(FileSystems.getDefault().getPath("deploy/hash"), Charset.forName("UTF-8"));
 		for (String line : hashData) {
 			builder.append(line);
 			builder.append(System.lineSeparator());
