@@ -39,16 +39,15 @@ When you want to use the server without the ZIP-file, you can just copy all your
 
 ### Example configuration file
 
-Here is a example configuration file (config.properties) with full commentated settings:
+Here is a example configuration file (config.properties) with fully annotated settings:
 
 ```
-#Bench Properties File
-#Fri Jul 11 19:23:10 CEST 2014
-# Enable /hash context (required for the BotA patcher)
+# Bench configuration file
+# Enable /hash context
 hash.context=true
-# Enabled /package context (not useful for the BotA patcher, just returns the zip file with the complete patch) 
+# Enabled /package context
 package.context=true
-# Enable /files context (required for the BotA patcher)
+# Enable /files context
 files.context=true
 # Port for the listener
 server.port=80
