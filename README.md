@@ -37,6 +37,16 @@ When you want to use the server without the ZIP-file, you can just copy all your
 5. When everything works fine, you should see a list of files and their attached hashes (only when the release.zip isn't empty)
 6. You can customize the server by editing the config.properties file
 
+## Building the project
+
+1. Clone the repository using `git clone https://github.com/mooxmirror/Bench.git`
+2. Run `maven package`
+3. If successful, you get a file named `bench-x.x.x-jar-with-dependencies.jar`
+4. Copy this file to the folder, where you want to run the server
+5. To use the patch deployer, enter `java -cp bench-x.x.x-jar-with-dependencies.jar io.mooxmirror.bench.deployer.PatchDeployer [archive file]`
+6. To use the patch server, enter `java -cp bench-x.x.x-jar-with-dependencies.jar io.mooxmirror.bench.system.HttpPatchServer`
+7. Continue with the steps you find above
+
 ### Example configuration file
 
 Here is a example configuration file (config.properties) with fully annotated settings:
