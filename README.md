@@ -1,4 +1,4 @@
-Bench [![Build Status](https://travis-ci.org/Mooxmirror/Bench.svg)](https://travis-ci.org/Mooxmirror/Bench)
+Bench [![Build Status](https://travis-ci.org/Mooxmirror/bench-server.svg)](https://travis-ci.org/Mooxmirror/bench-server)
 =================
 
 Bench provides a easy-to-use patch-environment for games and apps.
