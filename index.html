@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Bench by mooxmirror</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Bench</h1>
+      <h2 class="project-tagline">A simple patch-server for games and apps based on HTTP and file hashes.</h2>
+      <a href="https://github.com/mooxmirror/bench-server" class="btn">View on GitHub</a>
+      <a href="https://github.com/mooxmirror/bench-server/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/mooxmirror/bench-server/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="bench-" class="anchor" href="#bench-" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bench <a href="https://travis-ci.org/mooxmirror/bench-server"><img src="https://travis-ci.org/mooxmirror/bench-server.svg" alt="Build Status"></a>
+</h1>
+
+<p>Bench provides a easy-to-use patch-environment for games and apps.</p>
+
+<h2>
+<a id="how-does-it-work" class="anchor" href="#how-does-it-work" aria-hidden="true"><span class="octicon octicon-link"></span></a>How does it work?</h2>
+
+<p>Bench uses three main contexts for sharing data.</p>
+
+<table>
+<thead>
+<tr>
+<th>Context</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/hash</code></td>
+<td>Returns a plain text listing all files and their proper MD5-checksums seperated with a dollar-sign</td>
+</tr>
+<tr>
+<td><code>/files</code></td>
+<td>Represents the /files directory on the server</td>
+</tr>
+<tr>
+<td><code>/package</code></td>
+<td>Returns the zip file for complete new game installations</td>
+</tr>
+</tbody>
+</table>
+
+<h2>
+<a id="using-the-release-archives" class="anchor" href="#using-the-release-archives" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using the release archives</h2>
+
+<p><em>A step by step introduction for using the release jars.</em></p>
+
+<h3>
+<a id="deploying-a-patch" class="anchor" href="#deploying-a-patch" aria-hidden="true"><span class="octicon octicon-link"></span></a>Deploying a patch</h3>
+
+<ol>
+<li>Create a server root folder</li>
+<li>Copy the JAR-files into the folder</li>
+<li>Copy the ZIP-file with the game files into the folder</li>
+<li>Rename the pasted ZIP-file for example to <em>release.zip</em>
+</li>
+<li>Open a terminal (cmd, bash or something)</li>
+<li>Enter <code>java -jar PatchDeployer.jar release.zip</code>
+</li>
+<li>Close the terminal if everything was successful</li>
+</ol>
+
+<p>When you want to use the server without the ZIP-file, you can just copy all your game files into the files folder, open a terminal and run the PatchDeployer.jar without any command line argument.</p>
+
+<h3>
+<a id="running-the-server" class="anchor" href="#running-the-server" aria-hidden="true"><span class="octicon octicon-link"></span></a>Running the server</h3>
+
+<ol>
+<li>After the deploying the patch you have to open a new terminal</li>
+<li>Type in <code>java -jar PatchServer.jar</code>
+</li>
+<li>Now you should see some log messages</li>
+<li>Open your webbrowser and enter the URL <code>localhost/hash</code>
+</li>
+<li>When everything works fine, you should see a list of files and their attached hashes (only when the release.zip isn't empty)</li>
+<li>You can customize the server by editing the config.properties file</li>
+</ol>
+
+<h2>
+<a id="building-the-project" class="anchor" href="#building-the-project" aria-hidden="true"><span class="octicon octicon-link"></span></a>Building the project</h2>
+
+<ol>
+<li>Clone the repository using <code>git clone https://github.com/mooxmirror/Bench.git</code>
+</li>
+<li>Run <code>maven package</code>
+</li>
+<li>If successful, you get a file named <code>bench-x.x.x-jar-with-dependencies.jar</code>
+</li>
+<li>Copy this file to the folder, where you want to run the server</li>
+<li>To use the patch deployer, enter <code>java -cp bench-x.x.x-jar-with-dependencies.jar io.mooxmirror.bench.deployer.PatchDeployer [archive file]</code>
+</li>
+<li>To use the patch server, enter <code>java -cp bench-x.x.x-jar-with-dependencies.jar io.mooxmirror.bench.system.HttpPatchServer</code>
+</li>
+<li>Continue with the steps you find above</li>
+</ol>
+
+<h3>
+<a id="example-configuration-file" class="anchor" href="#example-configuration-file" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example configuration file</h3>
+
+<p>Here is a example configuration file (config.properties) with fully annotated settings:</p>
+
+<pre><code># Bench configuration file
+# Enable /hash context
+hash.context=true
+# Enabled /package context
+package.context=true
+# Enable /files context
+files.context=true
+# Port for the listener
+server.port=80
+# Cache lifetime in milliseconds (600000ms = 600s = 10m)
+cache.lifetime=600000
+</code></pre>
+
+<p>You successfully set up a new Bench server!</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/mooxmirror/bench-server">Bench</a> is maintained by <a href="https://github.com/mooxmirror">mooxmirror</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
