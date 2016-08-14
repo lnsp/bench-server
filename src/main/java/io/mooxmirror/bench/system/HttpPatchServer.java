@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.util.Properties;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,23 +21,23 @@ public class HttpPatchServer {
 		int port = Integer.parseInt(serverProperties.getProperty("server.port"));
 		long updateRate = Long.parseLong(serverProperties.getProperty("cache.lifetime"));
 
-		logger.setLevel(Level.ALL);
-		logger.info("Update rate set to " + (updateRate / 1000) + "s");
+		logger.addHandler(new FileHandler("server.log"));
+		logger.info("update rate set to " + (updateRate / 1000) + "s");
 
 		HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
 		logger.info("server listen on port " + port);
 
 		if (Boolean.parseBoolean(serverProperties.getProperty("package.context"))) {
 			server.createContext("/package", new PatchHandler(updateRate));
-			logger.info("/package context ready");
+			logger.fine("/package context ready");
 		}
 		if (Boolean.parseBoolean(serverProperties.getProperty("hash.context"))) {
 			server.createContext("/hash", new HashHandler(updateRate));
-			logger.info("/hash context ready");
+			logger.fine("/hash context ready");
 		}
 		if (Boolean.parseBoolean(serverProperties.getProperty("files.context"))) {
 			server.createContext("/files", new FilesHandler(updateRate));
-			logger.info("/files context ready");
+			logger.fine("/files context ready");
 		}
 		server.start();
 	}

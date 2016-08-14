@@ -21,6 +21,8 @@ public class FilesHandler extends CachedHandler<HashMap<String, byte[]>> impleme
 	@Override
 	public void handle(HttpExchange httpExchange) throws IOException {
 		testCache();
+		
+		HttpPatchServer.logger.fine("requested /files handler");
 
 		httpExchange.getResponseHeaders().add("Content-type", "application/octet-stream");
 		httpExchange.sendResponseHeaders(200, cacheData.get(httpExchange.getRequestURI().getPath()).length);
