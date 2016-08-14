@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -35,14 +36,19 @@ public class UnzipUtil {
         ZipEntry entry = zipIn.getNextEntry();
         // iterates over entries in the zip file
         while (entry != null) {
-            String filePath = destDirectory + File.separator + entry.getName();
-            if (!entry.isDirectory()) {
-                // if the entry is a file, extracts it
-                extractFile(zipIn, filePath);
+            String filePath = destDirectory + "/" + entry.getName();
+            
+            File path = new File(filePath);
+            File basePath = path.getParentFile();
+            
+            if (basePath != null) {
+            	basePath.mkdirs();
+            }
+            
+            if (entry.isDirectory()) {
+            	path.mkdir();
             } else {
-                // if the entry is a directory, make the directory
-                File dir = new File(filePath);
-                dir.mkdir();
+            	extractFile(zipIn, filePath);
             }
             zipIn.closeEntry();
             entry = zipIn.getNextEntry();
